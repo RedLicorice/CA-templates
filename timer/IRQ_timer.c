@@ -19,18 +19,21 @@ extern int ASM_funct(int, int);
 
 void TIMER0_IRQHandler (void)
 {
+	handle_timer(0);
   LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }
 
 void TIMER1_IRQHandler (void)
 {
+	handle_timer(1);
   LPC_TIM1->IR = 1;			/* clear interrupt flag */
   return;
 }
 
 void TIMER2_IRQHandler (void)
 {
+	handle_timer(2);
   LPC_TIM2->IR = 1;			/* clear interrupt flag */
   return;
 }

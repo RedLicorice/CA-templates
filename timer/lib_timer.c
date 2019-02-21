@@ -107,13 +107,25 @@ void reset_timer( uint8_t timer_num )
   return;
 }
 
+/******************************************************************************
+** Function name:		init_timer
+**
+** Descriptions:		Init timer
+**
+** parameters:			
+**									timer number: 0 or 1 or 2
+**									time [s] * frequency [1/s] (Frequency is 25MHz by default)
+** Returned value:		None
+**
+******************************************************************************/
 uint32_t init_timer ( uint8_t timer_num, uint32_t TimerInterval )
 {
 	/**
-	First bit	-> Interrupt ( 0 disabled 1 enabled )
-	Second bit	-> Reset ( 0 enabled 1 disabled )
-	Third bit	-> Stop (0 enabled 1 disabled )
-	7 possible values
+	MCR:
+		First bit	-> Interrupt ( 0 disabled 1 enabled )
+		Second bit	-> Reset ( 0 enabled 1 disabled )
+		Third bit	-> Stop (0 enabled 1 disabled )
+		7 possible values
 	**/
 	switch(timer_num){
 		case 0:
@@ -142,6 +154,10 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t TimerInterval )
 	}
 	
   return (0);
+}
+
+uint32_t init_timer_millis(uint8_t timer_num, uint32_t milliseconds){
+	return init_timer(timer_num, milliseconds * TIMER_FREQ_KHZ);
 }
 
 uint32_t is_timer_enabled ( uint8_t timer_num){

@@ -1,0 +1,46 @@
+
+**Library for use with Landtiger LPC-1768 board.**
+This library has been developed as a support for students attending the courses "Computer Architectures" and "Architetture dei Sistemi di Elaborazione" at Politecnico di Torino.
+## Mappings
+The mappings used for buttons and leds in this project are:
+
+	//Leds mapping:
+	//	LED		PIN		NUM
+	//	LD11 	p2.0	7
+	//	LD10 	p2.1	6
+	//	LD9  	p2.2	5
+	//	LD8  	p2.3	4
+	//	LD7  	p2.4	3
+	//	LD6  	p2.5	2
+	//	LD5  	p2.6	1
+	//	LD4  	p2.7	0
+
+	//Buttons mapping:
+	//	BUTTON	PIN		INTERRUPT		INDEX
+	//	INT0	p2.10	EINT0			0
+	//	KEY1	p2.11	EINT1			1
+	//	KEY2	p2.12	EINT2			2
+## Leds
+I added code for managing onboard leds, along with some useful functions. You can find those in lib_led.c, they are pretty mich self-explanatory.
+
+
+## Dynamic Handlers
+In order to use timer and button dynamic handling, you should add:
+
+    init_timer_handlers(); // Initialize timer handlers
+    init_button_handlers(); //Initialize button handlers
+
+To your starting code.
+
+An "handler" is a function defined as follows:
+
+    void handler(int source_id){
+	    [...]
+	}
+
+Where source_id represents the calling event, ie which button has been pressed.
+
+## Debouncing Buttons
+Button debouncing was implemented by the original library author by disabling following interrupts, I added another version using a debounce timer.
+You can enable it by uncommenting USE_DEBOUNCE_TIMER definition in funct_button.c
+
